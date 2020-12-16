@@ -14,6 +14,8 @@ Micro servicio encargado atender las peticiones que se hacen al bot y enviar la 
 
 `MONGO_URI`: URI de la base de datos MongoDB, por defecto: `mongodb://127.0.0.1/coviddb`
 
+`API_URI`: URI del API
+
 ## Instalación y ejecución
 1. Clonar este repo.
 2. Instalar dependencias de node: `yarn install` o `npm install`
