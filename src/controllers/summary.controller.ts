@@ -1,11 +1,11 @@
-import { ContextMessageUpdate } from 'telegraf'
 import axios, { AxiosResponse } from 'axios'
-import summary from '../types/summary'
-
-import UserModel from '../models/User'
+import { ContextMessageUpdate } from 'telegraf'
 import ChatModel from '../models/Chats'
+import UserModel from '../models/User'
+import summary from '../types/summary'
+import nogroup from './nogroup'
 
-import nogroup from './nogroup';
+
 
 export default async (ctx: ContextMessageUpdate) => {
     let chatId = ctx.message?.chat.id
@@ -39,13 +39,13 @@ export default async (ctx: ContextMessageUpdate) => {
     else {
 
         let res: AxiosResponse<summary> =
-            await axios.get(process.env.API_URI + 'summary')
+            await axios.get(process.env.API_URI + '/summary')
 
         var diff = ''
 
         let val = Math.abs(res.data.diferencia_ayer)
 
-        if(res.data.diferencia_ayer > 0) {
+        if (res.data.diferencia_ayer > 0) {
             diff = `(🔺${val})`
         }
         else {
@@ -67,7 +67,7 @@ export default async (ctx: ContextMessageUpdate) => {
 
         ctx.telegram.sendChatAction(chatId || 0, 'typing')
 
-        let graph = await axios.get(`${process.env.API_URI}summary_graph`, { responseType: 'arraybuffer' })
+        let graph = await axios.get(`${process.env.API_URI}/summary_graph`, { responseType: 'arraybuffer' })
 
         ctx.replyWithPhoto({ source: Buffer.from(graph.data) })
     }

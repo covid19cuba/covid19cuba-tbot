@@ -1,11 +1,11 @@
-import { ContextMessageUpdate, Markup } from 'telegraf'
 import axios, { AxiosResponse } from 'axios'
-import summary from '../types/summary'
-
-import UserModel from '../models/User'
+import { ContextMessageUpdate, Markup } from 'telegraf'
 import ChatModel from '../models/Chats'
+import UserModel from '../models/User'
+import summary from '../types/summary'
+import nogroup from './nogroup'
 
-import nogroup from './nogroup';
+
 
 let keyboard = Markup
     .keyboard([
@@ -55,7 +55,7 @@ export default async (ctx: ContextMessageUpdate) => {
     else {
 
         let res: AxiosResponse<summary> =
-            await axios.get(process.env.API_URI + 'summary')
+            await axios.get(process.env.API_URI + '/summary')
 
         ctx.replyWithHTML(`
 🤒 <b>Diagnosticados</b>: ${res.data.total_diagnosticados}

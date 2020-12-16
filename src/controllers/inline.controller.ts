@@ -1,12 +1,12 @@
-import { ContextMessageUpdate } from 'telegraf'
-
 import axios, { AxiosResponse } from 'axios'
+import { ContextMessageUpdate } from 'telegraf'
 import summary from '../types/summary'
 
 
+
 export default async (ctx: ContextMessageUpdate) => {
-    let res: AxiosResponse<summary> = 
-        await axios.get(process.env.API_URI + 'summary')
+    let res: AxiosResponse<summary> =
+        await axios.get(process.env.API_URI + '/summary')
 
     return ctx.answerInlineQuery([
         ({

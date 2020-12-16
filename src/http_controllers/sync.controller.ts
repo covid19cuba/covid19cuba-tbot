@@ -1,11 +1,11 @@
+import axios, { AxiosResponse } from 'axios';
 import { Request, Response } from 'express';
-
+import bot from '../bot';
 import Chats from '../models/Chats';
+import summary from '../types/summary';
 
-import bot from '../bot'
 
-import axios, { AxiosResponse } from 'axios'
-import summary from '../types/summary'
+
 
 export default async (req: Request, res: Response) => {
     if (req.headers.stoken === process.env.STOKEN) {
@@ -22,7 +22,7 @@ const sender = async () => {
     const chats = await Chats.find()
 
     let res: AxiosResponse<summary> =
-        await axios.get(process.env.API_URI + 'summary')
+        await axios.get(process.env.API_URI + '/summary')
 
     chats.forEach((c) => {
         bot.telegram.sendMessage(c.id, `
